@@ -15,25 +15,27 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 try:
     USER_ID_H_1 = os.environ['USER_ID_H_1']
-   # USER_ID_H_2 = os.environ['USER_ID_H_2']
 except:
     # 本地调试用
     USER_ID_H_1 = ''
- #   USER_ID_H_2 = ''
     
 try:
     PASS_WD_H_1 = os.environ['PASS_WD_H_1']
- # s  PASS_WD_H_2 = os.environ['PASS_WD_H_2']
 except:
     # 本地调试用
     PASS_WD_H_1 = ''
- #   PASS_WD_H_2 = ''
 
 try:
-    BARK_KEY = os.environ['BARK_KEY']
+    USER_ID_H_2 = os.environ['USER_ID_H_2']
 except:
     # 本地调试用
-    BARK_KEY = ''
+    USER_ID_H_2 = ''
+    
+try:
+    PASS_WD_H_2 = os.environ['PASS_WD_H_2']
+except:
+    # 本地调试用
+    PASS_WD_H_2 = ''
 
 try:
     TG_BOT_TOKEN = os.environ['TG_BOT_TOKEN']
@@ -201,7 +203,41 @@ def login_1():
     else:
         print('- reCAPTCHA not found!')
         submit()
+        
+def login_2():
+    print('- login')
+    delay(1)
+    # CF
+    cloudflareDT()
 
+    #scrollDown('@login')
+    #scrollDown('.btn btn-primary')
+
+    print('- fill user id')
+    if USER_ID_H_2 == '':
+        print('*** USER_ID_H_2 is empty ***')
+        kill_browser()
+    else:
+        write(USER_ID_H_2, into=S('@username'))
+    print('- fill password')
+    if PASS_WD_H_2 == '':
+        print('*** PASS_WD_H_2 is empty ***')
+        kill_browser()
+    else:
+        write(PASS_WD_H_2, into=S('@password'))
+
+    # if Text('reCAPTCHA').exists():
+    if Text('I\'m not a robot').exists() or Text('我不是机器人').exists():
+        # if S('#recaptcha-token').exists():
+        print('- reCAPTCHA found!')
+        block = reCAPTCHA()
+        if block:
+            print('*** Possibly blocked by google! ***')
+        else:
+            submit()
+    else:
+        print('- reCAPTCHA not found!')
+        submit()
 
 def submit():
     print('- submit')
@@ -372,6 +408,11 @@ def funcCAPTCHA():
     print('- captcha result: %d %s %d = %s' % (number1, method, number2, captcha_result))
     return captcha_result
 
+def Logout():
+    wait_until(Button('Logout').exists)
+    highlight(Button('Logout'))
+    time.sleep(2)
+    click(Button('Logout'))
 
 audioFile = '/audio.mp3'
 imgFile = '/capture.png'
@@ -392,3 +433,12 @@ delay(2)
 set_driver(driver)
 go_to(urlLogin)
 login_1()
+Logout()
+
+print('- loading...')
+driver = uc.Chrome(use_subprocess=True)
+driver.set_window_size(785, 627)
+delay(2)
+set_driver(driver)
+go_to(urlLogin)
+login_2()
