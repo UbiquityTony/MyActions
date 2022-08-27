@@ -427,7 +427,8 @@ block = False
 # robot = 0
 
 print('- loading...')
-driver = uc.Chrome(use_subprocess=True)
+driver = webdriver.Chrome(
+            options=options)
 driver.set_window_size(785, 627)
 delay(2)
 set_driver(driver)
@@ -435,8 +436,10 @@ go_to(urlLogin)
 login_1()
 Logout()
 
+delay(10)
 print('- loading...')
-driver = uc.Chrome(use_subprocess=True)
+driver = webdriver.Chrome(
+            options=options)
 driver.set_window_size(785, 627)
 delay(2)
 set_driver(driver)
