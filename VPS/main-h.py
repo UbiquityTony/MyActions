@@ -26,7 +26,7 @@ try:
     PASS_WD_H_2 = os.environ['PASS_WD_H_2']
 except:
     # 本地调试用
-    PASS_WD_H_2 = ''
+    PASS_WD_H_1 = ''
     PASS_WD_H_2 = ''
 
 try:
