@@ -15,19 +15,19 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 try:
     USER_ID_H_1 = os.environ['USER_ID_H_1']
-    USER_ID_H_2 = os.environ['USER_ID_H_2']
+   # USER_ID_H_2 = os.environ['USER_ID_H_2']
 except:
     # 本地调试用
     USER_ID_H_1 = ''
-    USER_ID_H_2 = ''
+ #   USER_ID_H_2 = ''
     
 try:
     PASS_WD_H_1 = os.environ['PASS_WD_H_1']
-    PASS_WD_H_2 = os.environ['PASS_WD_H_2']
+  s  PASS_WD_H_2 = os.environ['PASS_WD_H_2']
 except:
     # 本地调试用
     PASS_WD_H_1 = ''
-    PASS_WD_H_2 = ''
+ #   PASS_WD_H_2 = ''
 
 try:
     BARK_KEY = os.environ['BARK_KEY']
